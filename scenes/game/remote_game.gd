@@ -50,12 +50,12 @@ func _get_player_from_remote_id(remote_id : int):
 func get_striking_card_ids_for_player(player : LocalGame.Player) -> Array:
 	return local_game.get_striking_card_ids_for_player(player)
 
-func initialize_game(player_info, 
-		opponent_info, 
-		starting_player : Enums.PlayerId, 
-		seed_value : int, 
-		observer_mode : bool, 
-		replay_mode : bool, 
+func initialize_game(player_info,
+		opponent_info,
+		starting_player : Enums.PlayerId,
+		seed_value : int,
+		observer_mode : bool,
+		replay_mode : bool,
 		starting_message_queue : Array):
 	_game_message_queue = starting_message_queue
 	_game_message_history = []
@@ -65,7 +65,7 @@ func initialize_game(player_info,
 	_observer_mode = observer_mode
 	_replay_mode = replay_mode
 	local_game = LocalGame.new()
-	local_game.initialize_game(player_info['deck'], opponent_info['deck'], 
+	local_game.initialize_game(player_info['deck'], opponent_info['deck'],
 		player_info['name'], opponent_info['name'], starting_player, seed_value)
 	local_game.draw_starting_hands_and_begin()
 
@@ -144,6 +144,9 @@ func can_do_reshuffle(player : LocalGame.Player) -> bool:
 
 func can_do_boost(player : LocalGame.Player) -> bool:
 	return local_game.can_do_boost(player)
+
+func can_do_ex_transform(player : LocalGame.Player) -> bool:
+	return local_game.can_do_ex_transform(player)
 
 func can_do_strike(player : LocalGame.Player) -> bool:
 	return local_game.can_do_strike(player)
@@ -556,7 +559,7 @@ func do_match_result(player_clock_remaining, opponent_clock_remaining):
 	}
 	_submit_game_message(action_message)
 	return true
-	
+
 # In order to make sure a player only gets a game over for seeing the clock
 # on their screen run out, this function assumes that the local player
 # is the one whose clock ran out and should only be called when this is true.
